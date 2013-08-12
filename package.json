@@ -1,0 +1,22 @@
+{
+  "name": "prison",
+  "version": "0.0.1",
+  "description": "Simple async caching",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/bthesorceror/prison"
+  },
+  "keywords": [
+    "caching",
+    "async"
+  ],
+  "author": "Brandon Farmer",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/bthesorceror/prison/issues"
+  }
+}
