@@ -30,6 +30,7 @@ Prison.prototype.incarcerate = function(key, time, func) {
 
   var cached = this._get(key);
   var warden = new Warden(key);
+
   if (!cached || cached.time < (new Date()).getTime()) {
     warden.once('done', function(val) {
       this._set(key, val, time);
@@ -37,9 +38,10 @@ Prison.prototype.incarcerate = function(key, time, func) {
     func(warden);
   } else {
     process.nextTick(function() {
-      warden.emit('done', cached.result);
+      warden.done(cached.result);
     });
   }
+
   return warden;
 }
 
