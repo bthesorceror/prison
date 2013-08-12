@@ -34,25 +34,24 @@ Prison.prototype.incarcerate = function(key, time, func) {
     time = this.default_time;
   }
 
-  var cached = this._get(key);
+  var cache = this._get(key);
   var warden = new Warden();
 
-  if (this._useCache(cached)) {
+  if (this._isCached(cache)) {
     warden.once('done', function(val) {
       this._set(key, val, time);
     }.bind(this));
     func(warden);
   } else {
-    warden.done(cached.result);
+    warden.done(cache.result);
   }
 
   return warden;
 }
 
-Prison.prototype._useCache = function(cache) {
-return (!cache || cache.time < (new Date()).getTime());
+Prison.prototype._isCached = function(cache) {
+  return (!cache || cache.time < (new Date()).getTime());
 }
-
 
 Prison.prototype._set = function(key, result, time) {
   var timestamp = (new Date().getTime()) + time;
