@@ -14,7 +14,9 @@ function Warden() {}
 (require('util')).inherits(Warden, require('events').EventEmitter);
 
 Warden.prototype.done = function(val) {
-  this.emit('done', val);
+  process.nextTick(function() {
+    this.emit('done', val);
+  }.bind(this));
 }
 
 function Prison(default_time, backend) {
@@ -37,9 +39,7 @@ Prison.prototype.incarcerate = function(key, time, func) {
     }.bind(this));
     func(warden);
   } else {
-    process.nextTick(function() {
-      warden.done(cached.result);
-    });
+    warden.done(cached.result);
   }
 
   return warden;

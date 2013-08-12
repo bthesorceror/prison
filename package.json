@@ -18,5 +18,8 @@
   "license": "BSD",
   "bugs": {
     "url": "https://github.com/bthesorceror/prison/issues"
+  },
+  "devDependencies": {
+    "tape": "~1.0.4"
   }
 }
