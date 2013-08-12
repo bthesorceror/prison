@@ -1,7 +1,7 @@
 {
   "name": "prison",
   "version": "0.0.1",
-  "description": "Simple async caching",
+  "description": "Simple interface for caching asynchronous callback responses.",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
@@ -10,6 +10,9 @@
     "type": "git",
     "url": "http://github.com/bthesorceror/prison"
   },
+  "contributors": [
+    "Jon Allured <jon.allured@gmail.com>"
+  ],
   "keywords": [
     "caching",
     "async"
