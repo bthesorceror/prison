@@ -125,3 +125,19 @@ var key = 'some_key';
     });
   });
 })();
+
+(function() {
+  tape('cache is busted', function(test) {
+    test.plan(2);
+
+    var backend = {
+      set: function(key, value) {
+        test.equal(key, 'some_key');
+        test.equal(value, null);
+      }
+    }
+    var prison = new Prison(default_time, backend);
+
+    prison.parole('some_key');
+  });
+})();

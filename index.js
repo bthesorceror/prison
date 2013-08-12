@@ -24,6 +24,10 @@ function Prison(default_time, backend) {
   this.backend = backend || new MemoryBackend();
 }
 
+Prison.prototype.parole = function(key) {
+  this.backend.set(key, null);
+};
+
 Prison.prototype.incarcerate = function(key, time, func) {
   if (typeof(time) == 'function') {
     func = time;
@@ -31,9 +35,9 @@ Prison.prototype.incarcerate = function(key, time, func) {
   }
 
   var cached = this._get(key);
-  var warden = new Warden(key);
+  var warden = new Warden();
 
-  if (!cached || cached.time < (new Date()).getTime()) {
+  if (this._useCache(cached)) {
     warden.once('done', function(val) {
       this._set(key, val, time);
     }.bind(this));
@@ -43,6 +47,10 @@ Prison.prototype.incarcerate = function(key, time, func) {
   }
 
   return warden;
+}
+
+Prison.prototype._useCache = function(cache) {
+return (!cache || cache.time < (new Date()).getTime());
 }
 
 
